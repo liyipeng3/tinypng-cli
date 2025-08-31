@@ -19,8 +19,12 @@ import piexif
 import time
 import threading
 
-# 初始化 colorama
-init(autoreset=True)
+# 初始化 colorama (仅在支持的环境中)
+try:
+    init(autoreset=True)
+except Exception:
+    # 在不支持 colorama 的环境中继续运行
+    pass
 
 class LoadingSpinner:
     """动态 loading 图标"""

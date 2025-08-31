@@ -83,8 +83,17 @@ jobs:
       shell: bash
       run: |
         if [ "${{ matrix.platform }}" = "windows" ]; then
-          echo "Building for Windows using specialized script..."
-          python build_windows.py
+          echo "Building for Windows..."
+          echo "Current directory: $(pwd)"
+          echo "Python version: $(python --version)"
+          echo "PyInstaller version: $(pyinstaller --version)"
+          echo "Directory contents:"
+          ls -la
+          echo "Starting PyInstaller build..."
+          python -m PyInstaller --onefile --name=tinypng.exe tinypng_cli.py --log-level DEBUG --clean --noconfirm
+          echo "Build completed with exit code: $?"
+          echo "Checking dist directory:"
+          ls -la dist/ || echo "dist directory not found"
         else
           echo "Building for ${{ matrix.platform }}..."
           python -m PyInstaller --onefile --name=tinypng tinypng_cli.py

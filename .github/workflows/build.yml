@@ -97,7 +97,8 @@ jobs:
       run: |
         if [ "${{ matrix.platform }}" = "windows" ]; then
           cd dist
-          zip -r ../tinypng-windows-${{ matrix.python-version }}.zip tinypng.exe
+          # Windows 使用 PowerShell 的 Compress-Archive
+          powershell -Command "Compress-Archive -Path tinypng.exe -DestinationPath ../tinypng-windows-${{ matrix.python-version }}.zip -Force"
           cd ..
         else
           cd dist

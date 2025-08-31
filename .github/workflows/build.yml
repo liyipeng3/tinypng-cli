@@ -92,11 +92,25 @@ jobs:
 
 
 
+    - name: Create platform-specific archive
+      shell: bash
+      run: |
+        if [ "${{ matrix.platform }}" = "windows" ]; then
+          cd dist
+          zip -r ../tinypng-windows-${{ matrix.python-version }}.zip tinypng.exe
+          cd ..
+        else
+          cd dist
+          zip -r ../tinypng-${{ matrix.platform }}-${{ matrix.python-version }}.zip tinypng
+          cd ..
+        fi
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: tinypng-${{ matrix.platform }}-${{ matrix.python-version }}
-        path: dist/
+        path: |
+          tinypng-${{ matrix.platform }}-${{ matrix.python-version }}.zip
 
   release:
     needs: build
@@ -123,7 +137,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          tinypng-*/tinypng*
+          tinypng-*.zip
         draft: false
         prerelease: false
         generate_release_notes: true

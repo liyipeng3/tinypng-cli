@@ -14,33 +14,33 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            python-version: '3.9'
-            platform: linux
+          # - os: ubuntu-latest
+          #   python-version: '3.9'
+          #   platform: linux
           - os: ubuntu-latest
             python-version: '3.10'
             platform: linux
-          - os: ubuntu-latest
-            python-version: '3.11'
-            platform: linux
-          - os: macos-latest
-            python-version: '3.9'
-            platform: macos
+          # - os: ubuntu-latest
+          #   python-version: '3.11'
+          #   platform: linux
+          # - os: macos-latest
+          #   python-version: '3.9'
+          #   platform: macos
           - os: macos-latest
             python-version: '3.10'
             platform: macos
-          - os: macos-latest
-            python-version: '3.11'
-            platform: macos
-          - os: windows-latest
-            python-version: '3.9'
-            platform: windows
+          # - os: macos-latest
+          #   python-version: '3.11'
+          #   platform: macos
+          # - os: windows-latest
+          #   python-version: '3.9'
+          #   platform: windows
           - os: windows-latest
             python-version: '3.10'
             platform: windows
-          - os: windows-latest
-            python-version: '3.11'
-            platform: windows
+          # - os: windows-latest
+          #   python-version: '3.11'
+          #   platform: windows
 
     runs-on: ${{ matrix.os }}
 

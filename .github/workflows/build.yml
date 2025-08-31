@@ -64,14 +64,27 @@ jobs:
         if [ "${{ matrix.platform }}" = "windows" ]; then
           echo "Installing Windows-specific dependencies..."
           pip install pywin32-ctypes
+          pip install pyinstaller-hooks-contrib
         fi
+
+    - name: Check Windows environment
+      if: matrix.platform == 'windows'
+      shell: bash
+      run: |
+        echo "Python version: $(python --version)"
+        echo "PyInstaller version: $(pyinstaller --version)"
+        echo "Current directory: $(pwd)"
+        echo "Directory contents:"
+        ls -la
+        echo "Python packages:"
+        pip list
 
     - name: Build executable
       shell: bash
       run: |
         if [ "${{ matrix.platform }}" = "windows" ]; then
-          echo "Building for Windows..."
-          python -m PyInstaller --onefile --name=tinypng.exe tinypng_cli.py --log-level DEBUG
+          echo "Building for Windows using specialized script..."
+          python build_windows.py
         else
           echo "Building for ${{ matrix.platform }}..."
           python -m PyInstaller --onefile --name=tinypng tinypng_cli.py

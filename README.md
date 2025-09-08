@@ -58,12 +58,12 @@ tinypng images/ -r -d compressed/
 
 ```bash
 # 设置 JPEG/WebP 质量
-tinypng image.png -q 85
+tinypng image.jpeg -q 85
 
 # 选择压缩预设
-tinypng image.png --preset fast      # 快速压缩
-tinypng image.png --preset balanced  # 平衡压缩 (默认)
-tinypng image.png --preset quality   # 高质量压缩
+tinypng image.jpeg --preset fast      # 快速压缩
+tinypng image.jpeg --preset balanced  # 平衡压缩 (默认)
+tinypng image.jpeg --preset quality   # 高质量压缩
 
 # 覆盖已存在的文件
 tinypng image.png --overwrite
